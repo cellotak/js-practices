@@ -22,22 +22,27 @@ function outputCal(year, month) {
   const lastDate = new Date(year, month, 0);
   const lastDay = lastDate.getDate();
 
-  process.stdout.write("   ".repeat(firstDayOfWeek));
+  print("   ".repeat(firstDayOfWeek));
 
   for (let day = 1; day <= lastDay; day++) {
     const rjustedDay = String(day).padStart(2, " ");
-    process.stdout.write(rjustedDay + " ");
+    print(rjustedDay + " ");
 
-    if ((firstDayOfWeek + day) % 7 === 0) {
-      process.stdout.write("\n");
+    if (isSaturday(firstDayOfWeek, day)) {
+      print("\n");
     }
   }
 
-  process.stdout.write("\n");
+  print("\n");
+}
+
+function print(text) {
+  process.stdout.write(text);
+}
+
+function isSaturday(firstDayOfWeek, day) {
+  return (firstDayOfWeek + day) % 7 === 0;
 }
 
 const target = identifyTargetDate();
-const year = target.year;
-const month = target.month;
-
-outputCal(year, month);
+outputCal(target.year, target.month);
