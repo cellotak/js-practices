@@ -2,6 +2,22 @@
 
 import minimist from "minimist";
 
+main();
+
+function main() {
+  const target = identifyTargetDate();
+  const year = target.year;
+  const month = target.month;
+
+  if (isInvalidMonth(month)) {
+    console.log("指定された月の値は無効です。1～12の範囲で入力して下さい。");
+  } else if (isInvalidYear(year)) {
+    console.log("指定された西暦の値は無効です。1以上の値を入力して下さい。");
+  } else {
+    outputCal(year, month);
+  }
+}
+
 function identifyTargetDate() {
   const argv = minimist(process.argv.slice(2));
   const today = new Date();
@@ -10,14 +26,6 @@ function identifyTargetDate() {
   const month = argv.m || today.getMonth() + 1;
 
   return { year: year, month: month };
-}
-
-function isInvalidMonth(month) {
-  return month < 1 || month > 12;
-}
-
-function isInvalidYear(year) {
-  return year < 1;
 }
 
 function outputCal(year, month) {
@@ -43,24 +51,22 @@ function outputCal(year, month) {
   print("\n");
 }
 
-function print(text) {
-  process.stdout.write(text);
+function isInvalidMonth(month) {
+  return month < 1 || month > 12;
 }
 
-function formatDay(day) {
-  return String(day).padStart(2, " ") + " ";
+function isInvalidYear(year) {
+  return year < 1;
+}
+
+function print(text) {
+  process.stdout.write(text);
 }
 
 function isSaturday(firstDayOfWeek, day) {
   return (firstDayOfWeek + day) % 7 === 0;
 }
 
-const target = identifyTargetDate();
-
-if (isInvalidMonth(target.month)) {
-  console.log("指定された月の値は無効です。1～12の範囲で入力して下さい。");
-} else if (isInvalidYear(target.year)) {
-  console.log("指定された西暦の値は無効です。1以上の値を入力して下さい。");
-} else {
-  outputCal(target.year, target.month);
+function formatDay(day) {
+  return String(day).padStart(2, " ") + " ";
 }
