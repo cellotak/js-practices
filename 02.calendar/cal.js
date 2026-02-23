@@ -12,6 +12,14 @@ function identifyTargetDate() {
   return { year: year, month: month };
 }
 
+function isInvalidMonth(month) {
+  return month < 1 || month > 12;
+}
+
+function isInvalidYear(year) {
+  return year < 1;
+}
+
 function outputCal(year, month) {
   console.log(`      ${month}月 ${year}`);
   console.log("日 月 火 水 木 金 土");
@@ -45,4 +53,11 @@ function isSaturday(firstDayOfWeek, day) {
 }
 
 const target = identifyTargetDate();
-outputCal(target.year, target.month);
+
+if (isInvalidMonth(target.month)) {
+  console.log("指定された月の値は無効です。1～12の範囲で入力して下さい。");
+} else if (isInvalidYear(target.year)) {
+  console.log("指定された西暦の値は無効です。1以上の値を入力して下さい。");
+} else {
+  outputCal(target.year, target.month);
+}
