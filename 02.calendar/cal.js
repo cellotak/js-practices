@@ -17,5 +17,15 @@ const firstDayOfWeek = firstDate.getDay();
 const lastDate = new Date(year, month, 0);
 const lastDay = lastDate.getDate();
 
-console.log(`対象月の1日の曜日の数値: ${firstDayOfWeek}`);
-console.log(`対象月の末日: ${lastDay}`);
+process.stdout.write("   ".repeat(firstDayOfWeek));
+
+for (let day = 1; day <= lastDay; day++) {
+  const rjustedDay = String(day).padStart(2, " ");
+  process.stdout.write(rjustedDay + " ");
+
+  if ((firstDayOfWeek + day) % 7 === 0) {
+    process.stdout.write("\n");
+  }
+}
+
+process.stdout.write("\n");
