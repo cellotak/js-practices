@@ -9,21 +9,32 @@ function main() {
   const year = target.year;
   const month = target.month;
 
+  const errors = [];
+
   if (isInvalidMonth(month)) {
-    console.log("指定された月の値は無効です。1～12の範囲で入力して下さい。");
-  } else if (isInvalidYear(year)) {
-    console.log("指定された西暦の値は無効です。1以上の値を入力して下さい。");
-  } else {
-    outputCal(year, month);
+    errors.push("指定された月の値は無効です。1～12の範囲で入力して下さい");
   }
+
+  if (isInvalidYear(year)) {
+    errors.push("指定された西暦の値は無効です。1以上の値を入力して下さい。");
+  }
+
+  if (errors.length > 0) {
+    for (const error of errors) {
+      console.log(error);
+    }
+    return;
+  }
+
+  outputCal(year, month);
 }
 
 function identifyTargetDate() {
   const argv = minimist(process.argv.slice(2));
   const today = new Date();
 
-  const year = argv.y || today.getFullYear();
-  const month = argv.m || today.getMonth() + 1;
+  const year = argv.y ?? today.getFullYear();
+  const month = argv.m ?? today.getMonth() + 1;
 
   return { year: year, month: month };
 }
