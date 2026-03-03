@@ -5,11 +5,8 @@ import minimist from "minimist";
 main();
 
 function main() {
-  const target = identifyTargetDate();
-  const year = target.year;
-  const month = target.month;
-
-  const errorMessages = validateYearMonth(year, month);
+  const targetYearAndMonth = identifyTargetDate();
+  const errorMessages = validateYearMonth(targetYearAndMonth);
 
   if (errorMessages.length > 0) {
     for (const message of errorMessages) {
@@ -18,7 +15,7 @@ function main() {
     process.exit(1);
   }
 
-  outputCal(year, month);
+  outputCal(targetYearAndMonth);
 }
 
 function identifyTargetDate() {
@@ -31,17 +28,18 @@ function identifyTargetDate() {
   return { year, month };
 }
 
-function validateYearMonth(year, month) {
+function validateYearMonth(targetYearAndMonth) {
   const errorMessages = [];
 
-  const isInvalidMonth = month < 1 || month > 12;
+  const isInvalidMonth =
+    targetYearAndMonth.month < 1 || targetYearAndMonth.month > 12;
   if (isInvalidMonth) {
     errorMessages.push(
       "指定された月の値は無効です。1～12の範囲で入力して下さい",
     );
   }
 
-  const isInvalidYear = year < 1;
+  const isInvalidYear = targetYearAndMonth.year < 1;
   if (isInvalidYear) {
     errorMessages.push(
       "指定された西暦の値は無効です。1以上の値を入力して下さい。",
@@ -51,14 +49,22 @@ function validateYearMonth(year, month) {
   return errorMessages;
 }
 
-function outputCal(year, month) {
-  console.log(`      ${month}月 ${year}`);
+function outputCal(targetYearAndMonth) {
+  console.log(`      ${targetYearAndMonth.month}月 ${targetYearAndMonth.year}`);
   console.log("日 月 火 水 木 金 土");
 
-  const firstDate = new Date(year, month - 1, 1);
+  const firstDate = new Date(
+    targetYearAndMonth.year,
+    targetYearAndMonth.month - 1,
+    1,
+  );
   const firstDayOfWeek = firstDate.getDay();
 
-  const lastDate = new Date(year, month, 0);
+  const lastDate = new Date(
+    targetYearAndMonth.year,
+    targetYearAndMonth.month,
+    0,
+  );
   const lastDay = lastDate.getDate();
 
   print("   ".repeat(firstDayOfWeek));
