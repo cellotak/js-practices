@@ -5,7 +5,7 @@ import minimist from "minimist";
 main();
 
 function main() {
-  const targetYearAndMonth = identifyTargetDate();
+  const targetYearAndMonth = parseTargetYearAndMonth();
   const errorMessages = validateYearMonth(targetYearAndMonth);
 
   if (errorMessages.length > 0) {
@@ -18,7 +18,7 @@ function main() {
   outputCal(targetYearAndMonth);
 }
 
-function identifyTargetDate() {
+function parseTargetYearAndMonth() {
   const argv = minimist(process.argv.slice(2));
   const today = new Date();
 
