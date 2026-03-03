@@ -9,13 +9,13 @@ function main() {
   const year = target.year;
   const month = target.month;
 
-  const errors = validateYearMonth(year, month);
+  const errorMessages = validateYearMonth(year, month);
 
-  if (errors.length > 0) {
-    for (const error of errors) {
-      console.log(error);
+  if (errorMessages.length > 0) {
+    for (const message of errorMessages) {
+      console.error(message);
     }
-    return;
+    process.exit(1);
   }
 
   outputCal(year, month);
@@ -32,17 +32,23 @@ function identifyTargetDate() {
 }
 
 function validateYearMonth(year, month) {
-  const errors = [];
+  const errorMessages = [];
 
-  if (isInvalidMonth(month)) {
-    errors.push("指定された月の値は無効です。1～12の範囲で入力して下さい");
+  const isInvalidMonth = month < 1 || month > 12;
+  if (isInvalidMonth) {
+    errorMessages.push(
+      "指定された月の値は無効です。1～12の範囲で入力して下さい",
+    );
   }
 
-  if (isInvalidYear(year)) {
-    errors.push("指定された西暦の値は無効です。1以上の値を入力して下さい。");
+  const isInvalidYear = year < 1;
+  if (isInvalidYear) {
+    errorMessages.push(
+      "指定された西暦の値は無効です。1以上の値を入力して下さい。",
+    );
   }
 
-  return errors;
+  return errorMessages;
 }
 
 function outputCal(year, month) {
@@ -66,14 +72,6 @@ function outputCal(year, month) {
   }
 
   print("\n");
-}
-
-function isInvalidMonth(month) {
-  return month < 1 || month > 12;
-}
-
-function isInvalidYear(year) {
-  return year < 1;
 }
 
 function print(text) {
