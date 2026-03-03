@@ -28,7 +28,7 @@ function identifyTargetDate() {
   const year = argv.y ?? today.getFullYear();
   const month = argv.m ?? today.getMonth() + 1;
 
-  return { year: year, month: month };
+  return { year, month };
 }
 
 function validateYearMonth(year, month) {
