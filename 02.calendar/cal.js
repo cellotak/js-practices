@@ -2,10 +2,9 @@
 
 import minimist from "minimist";
 
-main();
-
 function main() {
   const targetYearAndMonth = parseTargetYearAndMonth();
+
   const errorMessages = validateYearMonth(targetYearAndMonth);
 
   if (errorMessages.length > 0) {
@@ -91,3 +90,5 @@ function isSaturday(firstDayOfWeek, day) {
 function formatDay(day) {
   return String(day).padStart(2, " ") + " ";
 }
+
+main();
