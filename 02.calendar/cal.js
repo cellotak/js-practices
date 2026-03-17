@@ -86,7 +86,7 @@ function print(text) {
 }
 
 function formatDay(day) {
-  return String(day).padStart(2, " ") + " ";
+  return `${String(day).padStart(2, " ")} `;
 }
 
 main();
