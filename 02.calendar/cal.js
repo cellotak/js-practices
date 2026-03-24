@@ -66,28 +66,24 @@ function outputCal(targetYearAndMonth) {
   );
   const lastDay = lastDate.getDate();
 
-  print("   ".repeat(firstDayOfWeek));
+  process.stdout.write("   ".repeat(firstDayOfWeek));
 
   for (let day = 1; day <= lastDay; day++) {
     const isSaturday = (firstDayOfWeek + day) % 7 === 0;
     const paddedDay = String(day).padStart(2, " ");
 
     if (isSaturday || day === lastDay) {
-      print(paddedDay);
+      process.stdout.write(paddedDay);
     } else {
-      print(`${paddedDay} `);
+      process.stdout.write(`${paddedDay} `);
     }
 
     if (isSaturday) {
-      print("\n");
+      process.stdout.write("\n");
     }
   }
 
-  print("\n");
-}
-
-function print(text) {
-  process.stdout.write(text);
+  process.stdout.write("\n");
 }
 
 main();
