@@ -69,9 +69,14 @@ function outputCal(targetYearAndMonth) {
   print("   ".repeat(firstDayOfWeek));
 
   for (let day = 1; day <= lastDay; day++) {
-    print(formatDay(day));
-
     const isSaturday = (firstDayOfWeek + day) % 7 === 0;
+    const paddedDay = String(day).padStart(2, " ");
+
+    if (isSaturday || day === lastDay) {
+      print(paddedDay);
+    } else {
+      print(`${paddedDay} `);
+    }
 
     if (isSaturday) {
       print("\n");
@@ -83,10 +88,6 @@ function outputCal(targetYearAndMonth) {
 
 function print(text) {
   process.stdout.write(text);
-}
-
-function formatDay(day) {
-  return `${String(day).padStart(2, " ")} `;
 }
 
 main();
