@@ -71,11 +71,8 @@ function outputCal(targetYearAndMonth) {
     const isLastDay = day === lastDate.getDate();
     const paddedDay = String(day).padStart(2, " ");
 
-    if (isSaturday || isLastDay) {
-      process.stdout.write(paddedDay);
-    } else {
-      process.stdout.write(`${paddedDay} `);
-    }
+    const gap = isSaturday || isLastDay ? "" : " ";
+    process.stdout.write(`${paddedDay}${gap}`);
 
     if (isSaturday) {
       process.stdout.write("\n");
