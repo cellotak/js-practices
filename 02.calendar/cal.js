@@ -68,9 +68,10 @@ function outputCal(targetYearAndMonth) {
 
   for (let day = 1; day <= lastDate.getDate(); day++) {
     const isSaturday = (firstDate.getDay() + day) % 7 === 0;
+    const isLastDay = day === lastDate.getDate();
     const paddedDay = String(day).padStart(2, " ");
 
-    if (isSaturday || day === lastDate.getDate()) {
+    if (isSaturday || isLastDay) {
       process.stdout.write(paddedDay);
     } else {
       process.stdout.write(`${paddedDay} `);
