@@ -73,12 +73,10 @@ function outputCal(targetYearAndMonth) {
 
     process.stdout.write(paddedDay);
 
-    if (!isSaturday && !isLastDay) {
-      process.stdout.write(" ");
-    }
-
     if (isSaturday) {
       process.stdout.write("\n");
+    } else if (!isLastDay) {
+      process.stdout.write(" ");
     }
   }
 
