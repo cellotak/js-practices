@@ -37,3 +37,15 @@ export function get(sql, params = []) {
     });
   });
 }
+
+export function close() {
+  return new Promise((resolve, reject) => {
+    db.close((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}

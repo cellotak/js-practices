@@ -1,4 +1,4 @@
-import { db, run, all } from "./db.js";
+import { run, all, close } from "./db.js";
 
 async function main() {
   await run(
@@ -17,6 +17,7 @@ async function main() {
   });
 
   await run("DROP TABLE books");
+  await close();
 }
 
-main().then(() => db.close());
+main();
