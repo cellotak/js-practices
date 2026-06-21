@@ -1,6 +1,6 @@
 import { run, all, close } from "./db.js";
 
-async function main() {
+const main = async () => {
   await run(
     "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
   );
@@ -18,6 +18,6 @@ async function main() {
 
   await run("DROP TABLE books");
   await close();
-}
+};
 
 main();
