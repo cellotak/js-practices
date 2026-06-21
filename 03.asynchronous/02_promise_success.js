@@ -1,4 +1,4 @@
-import { db, run, all } from "./db.js";
+import { run, all, close } from "./db.js";
 
 run(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
@@ -15,5 +15,5 @@ run(
   })
   .then(() => run("DROP TABLE books"))
   .then(() => {
-    db.close();
+    close();
   });
