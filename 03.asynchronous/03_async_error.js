@@ -21,4 +21,4 @@ const main = async () => {
   await close();
 };
 
-main();
+await main();
