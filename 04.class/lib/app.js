@@ -26,7 +26,12 @@ export class App {
   }
 
   list() {
-    this.repository.fetchAll().forEach((memo) => {
+    const memos = this.repository.fetchAll();
+    if (memos.length === 0) {
+      console.log("No memos found.");
+      return;
+    }
+    memos.forEach((memo) => {
       console.log(memo.title);
     });
   }
@@ -52,6 +57,7 @@ export class App {
     const selectedMemo = await this.#selectMemo(
       "Choose a note you want to read:",
     );
+    if (!selectedMemo) return;
     console.log(selectedMemo.content);
   }
 
@@ -59,11 +65,17 @@ export class App {
     const selectedMemo = await this.#selectMemo(
       "Choose a note you want to delete:",
     );
+    if (!selectedMemo) return;
     this.repository.delete(selectedMemo.id);
   }
 
   async #selectMemo(message) {
     const memos = this.repository.fetchAll();
+
+    if (memos.length === 0) {
+      console.log("No memos found.");
+      return null;
+    }
 
     const prompt = new Enquirer.Select({
       name: "memo",
