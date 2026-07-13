@@ -9,6 +9,9 @@
     "prettier": "^3.1.0"
   },
   "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "dependencies": {
     "enquirer": "^2.4.1"
   }
