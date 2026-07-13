@@ -80,10 +80,13 @@ export class App {
     const prompt = new Enquirer.Select({
       name: "memo",
       message,
-      choices: memos.map((memo) => memo.title),
+      choices: memos.map((memo) => ({ name: memo.title, value: memo.id })),
+      result(name) {
+        return this.map(name)[name];
+      },
     });
 
-    const selectedTitle = await prompt.run();
-    return memos.find((memo) => memo.title === selectedTitle);
+    const selectedId = await prompt.run();
+    return memos.find((memo) => memo.id === selectedId);
   }
 }
