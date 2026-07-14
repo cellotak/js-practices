@@ -7,7 +7,7 @@ export class App {
     this.repository = new MemoRepository();
   }
 
-  run() {
+  async run() {
     const option = process.argv[2];
 
     switch (option) {
@@ -15,10 +15,10 @@ export class App {
         this.list();
         break;
       case "-r":
-        this.read();
+        await this.read();
         break;
       case "-d":
-        this.delete();
+        await this.delete();
         break;
       default:
         this.add();
