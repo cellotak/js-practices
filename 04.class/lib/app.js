@@ -87,6 +87,6 @@ export class App {
     });
 
     const selectedId = await prompt.run();
-    return memos.find((memo) => memo.id === selectedId);
+    return memos.find((memo) => memo.id === Number(selectedId));
   }
 }
